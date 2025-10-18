@@ -25,12 +25,14 @@ async function ensureOpenAI() {
   return openai;
 }
 
-// ---- PDF text extraction via pdfjs-dist ----
+// ---- PDF text extraction via pdfjs-dist (modo Node) ----
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
-// Ambiente Node não precisa de worker, ele processa localmente
-pdfjs.GlobalWorkerOptions.workerSrc = null;
 
-
+// O Render/Node não requer worker; apenas definimos uma string vazia
+Object.defineProperty(pdfjs.GlobalWorkerOptions, "workerSrc", {
+  get: () => "",
+  set: () => {}, // ignora qualquer tentativa de set
+});
 
 // Multer config (memory storage)
 const upload = multer({

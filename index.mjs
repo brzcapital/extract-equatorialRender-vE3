@@ -27,8 +27,8 @@ async function ensureOpenAI() {
 
 // ---- PDF text extraction via pdfjs-dist ----
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
-import pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.mjs";
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+pdfjs.GlobalWorkerOptions.workerSrc = require.resolve("pdfjs-dist/legacy/build/pdf.worker.mjs");
+
 
 // Multer config (memory storage)
 const upload = multer({

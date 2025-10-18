@@ -27,7 +27,9 @@ async function ensureOpenAI() {
 
 // ---- PDF text extraction via pdfjs-dist ----
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
-pdfjs.GlobalWorkerOptions.workerSrc = require.resolve("pdfjs-dist/legacy/build/pdf.worker.mjs");
+// Ambiente Node não precisa de worker, ele processa localmente
+pdfjs.GlobalWorkerOptions.workerSrc = null;
+
 
 
 // Multer config (memory storage)
